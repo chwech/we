@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹出层效果</title>
+	<script>
+		window.onload = function(){
+			var aClick = document.getElementById("click-in");
+					aClick.onclick = function(){
+						//获取可视区域宽度和高度
+						var viewWidth = window.innerWidth;
+						var viewHeight = window.innerHeight;
+
+						if(viewWidth != "number"){
+							var viewWidth = document.documentElement.clientWidth;
+							var viewHeight = document.documentElement.clientHeight;
+						}else{
+							var viewWidth = document.body.clientWidth;
+							var viewHeight = document.body.clientHeight;
+						}
+							//遮罩层
+						var oMask = document.createElement("div");
+								oMask.id = "mask";
+								document.body.appendChild(oMask);
+								oMask.style.width = viewWidth + "px";
+								oMask.style.height = viewHeight + "px";
+
+						var login = document.getElementById("login");
+								login.style.display = "block";
+						    login.style.position = "absolute";
+						    login.style.top = (viewHeight - login.offsetHeight)/2 + "px";
+						    login.style.left = (viewWidth - login.offsetWidth)/2 + "px";
+				    var aclose = document.getElementById("close");
+				    oMask.onclick = aclose.onclick = function(){
+				    	document.body.removeChild(oMask);
+				    	login.style.display = "none";
+				    }
+					}		
+		}
+	</script>
+	<style>
+	  *{
+	  	margin: 0;
+	  	padding: 0;
+	  }
+	  a{
+	  	text-decoration: none;
+	  	color: #A27D82;
+	  }
+		#login{
+			width: 400px;
+			height: auto;
+			background-color: #fff;
+			font:16px/1 "微软雅黑";
+			color: #A27D82;
+			z-index: 1001;
+		}
+		#login .title{
+			width: 360px;
+			margin: 0 auto;
+			border-bottom: 1px solid #ccc;
+		}
+		#login .title .a{
+			display: inline-block;
+			width: 55px;
+			height: 50px;
+			text-decoration: none;
+			line-height: 50px;
+			padding-left: 25px;
+		}
+		#login .title #close{
+			font-size: 30px;
+			color: #ccc;
+			float: right;
+			margin-top: 5px;
+			transform: rotate(45deg);/*定义2d旋转 45度*/
+		}
+		#login .title #close:hover{
+			font-weight: bold;
+			color:red;
+		}
+		.content{
+			width: 330px;
+			margin: 34px auto;
+		}
+		input[type="text"]{
+			width: 326px;
+			height: 44px;
+			margin-bottom: 24px;
+		}
+		.fl{
+			float:left;
+			margin-right: 12px;
+		}
+		.fr{
+			float: right;
+		}
+		.login-btn{
+			width: 330px;
+			height: 56px;
+			background-color: red;
+			border: none;
+			font: 16px/56px "微软雅黑";
+			color: #fff;
+			margin-top: 24px;
+			margin-bottom: 24px;
+		}
+
+		#mask{
+			position: fixed;
+			left:0;
+			top:0;
+			background-color: #000;
+			opacity: 0.7;
+			filter: alpha(opacity=70);
+			z-index: 1000;
+		}
+	</style>
+</head>
+<body>
+	<a href="#" id="click-in" style="font-size:36px;margin:0 auto;display:block;width:72px;color:red;">登录</a>
+	<div class="login" id="login" style="display:none">
+		<div class="title">
+			<a href="#" class="a">登录</a>
+			<a href="#" class="a">注册</a>
+			<a href="#" id="close">+</a>
+		</div>
+		<div class="content">
+			<input type="text" value="请输入登录邮箱/手机号">
+			<input type="text" value="6-16位密码，区分大小写，不能用空格">
+			<input type="checkbox" checked="checked" class="fl">下次自动登录
+			<a href="#" class="fr">忘记密码</a>
+			<button type="button" class="login-btn">登录</button>
+			<a href="#"></a>
+			<div class="others">
+				<span>其它登录方式</span>
+				<a href=""></a>
+				<a href=""></a>
+				<a href=""></a>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>
