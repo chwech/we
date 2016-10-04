@@ -3,41 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>弹出层效果</title>
-	<script>
-		window.onload = function(){
-			var aClick = document.getElementById("click-in");
-					aClick.onclick = function(){
-						//获取可视区域宽度和高度
-						var viewWidth = window.innerWidth;
-						var viewHeight = window.innerHeight;
-
-						if(viewWidth != "number"){
-							var viewWidth = document.documentElement.clientWidth;
-							var viewHeight = document.documentElement.clientHeight;
-						}else{
-							var viewWidth = document.body.clientWidth;
-							var viewHeight = document.body.clientHeight;
-						}
-							//遮罩层
-						var oMask = document.createElement("div");
-								oMask.id = "mask";
-								document.body.appendChild(oMask);
-								oMask.style.width = viewWidth + "px";
-								oMask.style.height = viewHeight + "px";
-
-						var login = document.getElementById("login");
-								login.style.display = "block";
-						    login.style.position = "absolute";
-						    login.style.top = (viewHeight - login.offsetHeight)/2 + "px";
-						    login.style.left = (viewWidth - login.offsetWidth)/2 + "px";
-				    var aclose = document.getElementById("close");
-				    oMask.onclick = aclose.onclick = function(){
-				    	document.body.removeChild(oMask);
-				    	login.style.display = "none";
-				    }
-					}		
-		}
-	</script>
+	
 	<style>
 	  *{
 	  	margin: 0;
@@ -126,8 +92,8 @@
 			<a href="#" id="close">+</a>
 		</div>
 		<div class="content">
-			<input type="text" value="请输入登录邮箱/手机号">
-			<input type="text" value="6-16位密码，区分大小写，不能用空格">
+			<input type="text" placeholder="请输入登录邮箱/手机号">
+			<input type="text" placeholder="6-16位密码，区分大小写，不能用空格">
 			<input type="checkbox" checked="checked" class="fl">下次自动登录
 			<a href="#" class="fr">忘记密码</a>
 			<button type="button" class="login-btn">登录</button>
@@ -141,6 +107,40 @@
 		</div>
 		
 	</div>
-	
+	<script>
+		window.onload = function(){
+			var aClick = document.getElementById("click-in");
+					aClick.onclick = function(){
+						//获取可视区域宽度和高度
+						var viewWidth = window.innerWidth;
+						var viewHeight = window.innerHeight;
+
+						if(viewWidth != "number"){
+							var viewWidth = document.documentElement.clientWidth;
+							var viewHeight = document.documentElement.clientHeight;
+						}else{
+							var viewWidth = document.body.clientWidth;
+							var viewHeight = document.body.clientHeight;
+						}
+							//遮罩层
+						var oMask = document.createElement("div");
+								oMask.id = "mask";
+								document.body.appendChild(oMask);
+								oMask.style.width = viewWidth + "px";
+								oMask.style.height = viewHeight + "px";
+
+						var login = document.getElementById("login");
+								login.style.display = "block";
+						    login.style.position = "absolute";
+						    login.style.top = (viewHeight - login.offsetHeight)/2 + "px";
+						    login.style.left = (viewWidth - login.offsetWidth)/2 + "px";
+				    var aclose = document.getElementById("close");
+				    oMask.onclick = aclose.onclick = function(){
+				    	document.body.removeChild(oMask);
+				    	login.style.display = "none";
+				    }
+					}		
+		}
+	</script>
 </body>
 </html>
