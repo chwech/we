@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>返回顶部效果</title>
+	<style>
+	  #toTop{
+	  	width: 60px;
+			height: 60px;
+			cursor: pointer;
+			border: 1px solid #fa0000;
+			border-radius: 10px;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			-o-border-radius: 10px;
+			-ms-border-radius: 10px;
+			position: fixed;
+			bottom: 100px;
+			right: 150px;
+			display: none;
+	  }
+	  #toTop:hover{
+	  	opacity: 0.8;
+	  	filter: alpha(opacity = 80);
+	  }
+		#toTop>.arrows{
+			width: 20px;
+			margin: 3px auto 0;
+		}
+		#toTop>.arrows>.triangle{
+			width: 0;
+			height: 0;
+			border-bottom:10px solid #fa0000;
+			border-top:10px solid transparent;
+			border-left:10px solid transparent;
+			border-right:10px solid transparent;  
+		} 
+		#toTop>.arrows>.rectangle{
+			width: 10px;
+			height: 20px;
+			background-color: #fa0000;
+			margin-left: 5px;
+		}
+		.content-box{
+			width: 768px;
+			height: 1500px;
+			background-color: #ccc;
+			margin: 0 auto;
+			font-size: 24px;
+			padding: 40px 40px;
+		}
+	</style>
+</head>
+<body>
+	<div class="content-box">向下滚动，右下角会出现一个返回顶部的小图标，点击可以返回顶部</div>
+	<div id="toTop">
+		<div class="arrows">
+			<div class="triangle"></div>
+			<div class="rectangle"></div>
+		</div>
+	</div>
+	<script>
+	window.onload = function(){
+		var to_top = document.getElementById('toTop');
+		var timer = null;//定义定时器
+		var isTop = true;//到达顶部时标记为true
+		//获取可视高度
+		var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+		to_top.onclick = function(){		
+			timer = setInterval(function(){
+				//获取滚动条到顶部的高度
+				var top = document.documentElement.scrollTop || document.body.scrollTop;
+				var speed = Math.floor(-top/6);
+				document.documentElement.scrollTop = document.body.scrollTop = top + speed;
+				console.log(top);
+
+				isTop = true;
+				//返回顶部后清空定时器
+				if(top == 0){
+					clearTimeout(timer);
+				}			
+			}, 30);
+			
+
+		};
+		//用户滚动时停下
+			window.onscroll = function(){
+				var top = document.documentElement.scrollTop || document.body.scrollTop;
+				if(top >= clientHeight){
+					to_top.style.display = "block";
+				}else{
+					to_top.style.display = "none";
+				}
+				if(!isTop){
+					clearTimeout(timer);
+				}
+				isTop = false;
+			};
+	}
+	</script>
+</body>
+</html>
