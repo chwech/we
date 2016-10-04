@@ -1,0 +1,45 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font: 12px "宋体";
+}
+a{
+	color: #3c3c3c;
+	text-decoration: none;
+}
+li{
+	list-style: none;
+}
+#tabBox{
+	width: 300px;
+	height: 110px;
+	border:1px solid #ccc;
+	margin:100px auto 0;
+	/*overflow: hidden;*/
+	position: relative;
+}
+#tabBox h3{
+	float: left;
+	margin: 10.5px;
+	color: #3c3c3c;
+	font:12px/22px "宋体";
+	width: 39px;
+	height: 22px;
+	text-align: center;
+}
+#tabBox ul{
+	position: absolute;
+	top: 40px;
+	left: 10px;
+	display: none;
+}
+#tabBox ul>li{
+	float: left;
+	margin: 10px;
+}
+#tabBox .select{
+	font-weight: bold;
+	border-bottom: 2px solid red;
+}
