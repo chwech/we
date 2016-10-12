@@ -49,10 +49,17 @@
 			font-size: 24px;
 			padding: 40px 40px;
 		}
+		.content-box>.test{
+			width:100%;
+			height: 500px;
+			background: lightblue;
+		}
 	</style>
 </head>
 <body>
-	<div class="content-box">向下滚动，右下角会出现一个返回顶部的小图标，点击可以返回顶部</div>
+	<div class="content-box">	       向下滚动，右下角会出现一个返回顶部的小图标，点击可以返回顶部
+	<div class="test"></div>
+	</div>
 	<div id="toTop">
 		<div class="arrows">
 			<div class="triangle"></div>
@@ -69,35 +76,36 @@
 
 		to_top.onclick = function(){		
 			timer = setInterval(function(){
-				//获取滚动条到顶部的高度
+				//获取滚动隐藏内容的高度
 				var top = document.documentElement.scrollTop || document.body.scrollTop;
+				//缓冲运动
 				var speed = Math.floor(-top/6);
-				document.documentElement.scrollTop = document.body.scrollTop = top + speed;
-				console.log(top);
-
-				isTop = true;
+				document.documentElement.scrollTop = document.body.scrollTop = top + speed;				
 				//返回顶部后清空定时器
+				isTop = true;
 				if(top == 0){
-					clearTimeout(timer);
-				}			
+					clearInterval(timer);
+				}	
 			}, 30);
-			
-
 		};
-		//用户滚动时停下
-			window.onscroll = function(){
-				var top = document.documentElement.scrollTop || document.body.scrollTop;
-				if(top >= clientHeight){
-					to_top.style.display = "block";
-				}else{
-					to_top.style.display = "none";
-				}
-				if(!isTop){
-					clearTimeout(timer);
-				}
-				isTop = false;
-			};
-	}
+
+		window.onscroll = function(){
+			var top = document.documentElement.scrollTop || document.body.scrollTop;
+			//隐藏的内容大于可视区域的高度时，显示返回顶部按钮
+			if(top >= clientHeight){
+				// console.log(document.documentElement.clientHeight);
+				// console.log(document.body.scrollTop);
+				to_top.style.display = "block";
+			}else{
+				to_top.style.display = "none";
+			}
+			//用户滚动时如果未到达顶部停下
+			if(!isTop){
+				clearInterval(timer);
+			}
+			isTop = false;
+		};
+	};	
 	</script>
 </body>
 </html>

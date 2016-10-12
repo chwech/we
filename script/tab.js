@@ -1,14 +1,15 @@
 window.onload = function(){
 	var title = document.getElementsByTagName("h3");
-	for(let i = 0; i < title.length; i++){
-		title[i].onclick = function(){
-			var ul = document.getElementsByTagName("ul");
-			for(let j = 0; j < ul.length; j++){
+	var ul = document.getElementsByTagName("ul");
+	for(var i = 0, len = title.length;i < len; i++){
+		title[i].index = i;
+		title[i].onclick = function(){	
+			for(var j = 0; j < ul.length; j++){
 				ul[j].style.display = "none";
+				ul[this.index].style.display = "block";
 				title[j].className = "";
-			}
-			ul[i].style.display = "block";
-			title[i].className = "select";
-		}
+				title[this.index].className = "select";
+			}	
+		};
 	}
-}
+};
